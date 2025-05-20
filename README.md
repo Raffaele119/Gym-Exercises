@@ -2,14 +2,14 @@
 
 GymExercises è un'API RESTful che consente di gestire un insieme di esercizi da palestra tramite operazioni CRUD (Create, Read, Update, Delete).
 
-## ✅ Requisiti
+##  Requisiti
 
 - [Postman](https://www.postman.com/) o qualsiasi altro strumento per testare API REST
 - [XAMPP](https://www.apachefriends.org/it/index.html) per la gestione del database locale
 - Java + Maven
 - Eclipse (o un IDE compatibile)
 
-## 📦 Setup del progetto
+##  Setup del progetto
 
 1. **Collegamento al Database:**
    - Avvia XAMPP.
@@ -28,7 +28,7 @@ GymExercises è un'API RESTful che consente di gestire un insieme di esercizi da
 4. **Test dell'API:**
    - Una volta avviato Jetty, puoi testare gli endpoint tramite Postman o strumenti simili.
 
-## 📌 Endpoints disponibili
+##  Endpoints disponibili
 
 | Metodo | Endpoint                  | Descrizione                                |
 |--------|---------------------------|--------------------------------------------|
@@ -38,13 +38,13 @@ GymExercises è un'API RESTful che consente di gestire un insieme di esercizi da
 | PUT    | `/api/exercises/{id}`    | Aggiorna un esercizio esistente           |
 | DELETE | `/api/exercises/{id}`    | Elimina un esercizio tramite ID           |
 
-## 📁 Contenuti della Repository
+##  Contenuti della Repository
 
 - Codice sorgente Java del progetto
 - File `trainer.sql` per la creazione del database
 - Questo file `README.md`
 
-## ℹ️ Note
+## ℹ Note
 
 - Assicurati che il database `trainer` sia attivo prima di avviare il server.
 - Tutte le chiamate devono essere fatte su `http://localhost:{porta}/api/exercises` (sostituisci `{porta}` con la porta reale, es. `8080`).
