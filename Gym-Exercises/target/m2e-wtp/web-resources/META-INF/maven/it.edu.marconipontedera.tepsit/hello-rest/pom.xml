@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+<!-- 
+	Il contenuto dei tag groupId,artifactId è da personalizzare, considerando che:
+	 - groupId è la categoria a cui vuoi far appartenere il tuo progetto
+	 - artifactId è il nome del tuo progetto
+ -->
+  <groupId>it.edu.marconipontedera.tepsit</groupId>
+  <artifactId>hello-rest</artifactId>
+<!-- 
+	il tag version si usa per indicare la versione su cui stiamo lavorando
+	considerando che normalmente si creano versione nuove dei software
+	SNAPSHOT è una parola chiave per indicare che non è una versione stabile
+	ma una versione in fase di sviluppo
+ -->  
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+
+<!-- 
+	I tag che seguono servono per descrivere il progetto, sono da personalizzare
+	come si vuole
+-->  
+  <name>00 - Maven e Web in Java</name>
+  <url>https://github.com/kismet/teaching/tree/main/tepsit</url>
+  <developers>
+	  <developer>
+	  	<name>Francesco Ciofi</name>
+	  	<roles><role>Original Author</role></roles>
+	  	<organization>html.it</organization>
+	  	<organizationUrl>https://www.html.it/pag/60987/restful-web-services-in-java-con-jersey-introduzione/</organizationUrl>
+	  </developer>
+	  <developer>
+	  	<name>Stefano Lenzi</name>
+	  	<roles><role>Docente</role></roles>
+	  	<organization>ITI "G.Marconi" di Pontedera, Italy</organization>
+	  	<organizationUrl>https://www.marconipontedera.edu.it/</organizationUrl>
+	  </developer>
+  </developers>
+  <description>
+  	Questo progetto rappresenta i primi passi per creare un software in Java
+  	che fa uso di tecnologia Web e Maven. In particolare vederemo come usare
+  	Maven per partire da un modello, gestire le dipendenze del software ed 
+  	effettuare i test del software. 
+  	Java per sperimentare con JAX-RS per implementare servizi REST e JSP come
+  	alternativa e paralallelo alla tecnolgia PHP.
+  	Questo progetto si basa sulla guida scritta da Francesco Ciofi
+  	https://www.html.it/pag/60987/restful-web-services-in-java-con-jersey-introduzione/	
+  </description>
+  <organization>
+	  <name>ITI "G.Marconi" Pontedera (PI)</name>
+	  <url>https://www.marconipontedera.edu.it/</url>
+  </organization>
+  
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
+
+  <dependencies>	
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>test</scope>
+    </dependency>
+  	<!-- 
+		Le dipendenze che seguono servono solo per la parte JAX-RS ed è
+		necessario usare la versione 2.X perchè le versioni successive
+		non sono più compatibili 
+  	-->
+	<dependency>
+		<groupId>org.glassfish.jersey.containers</groupId>
+		<artifactId>jersey-container-servlet</artifactId>
+		<version>2.23.2</version>
+	</dependency>
+	<dependency>
+		<groupId>org.glassfish.jersey.media</groupId>
+		<artifactId>jersey-media-moxy</artifactId>
+		<version>2.23.2</version> 
+	</dependency> 
+  </dependencies>
+
+  <build>
+    <finalName>hello-rest</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.4.0</version>
+			<configuration>
+				<failOnMissingWebXml>false</failOnMissingWebXml>
+			</configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+	<plugin>
+		<groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-maven-plugin</artifactId>
+		<version>9.3.11.v20160721</version>
+		<configuration>
+			<scanIntervalSeconds>10</scanIntervalSeconds>
+		</configuration>
+		<!-- 
+	Le dipendeze che segueono sono necessarie per evitare problemi di 
+	dipendenze al momento dell'esecuzione quando si usa il goal
+	mvn jetty:run 
+	perchè le _ultime JVM_ non includono più JAX-RS
+		-->
+    <dependencies>
+        <!-- JAXB API -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!-- JAXB Implementation -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+    </dependencies>		
+	</plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+<!-- 
+	References:
+	Jersey - https://eclipse-ee4j.github.io/jersey/
+	Jersey 2.X Docs - https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/index.html
+	JAX-RS - https://en.wikipedia.org/wiki/Jakarta_RESTful_Web_Services
+	RESTEasy - https://resteasy.dev/books/
+	RESTEasy Docs - https://docs.resteasy.dev/6.2/userguide/
+-->
