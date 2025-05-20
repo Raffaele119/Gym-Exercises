@@ -32,7 +32,7 @@ GymExercises è un'API RESTful che consente di gestire un insieme di esercizi da
 
 - L'endpoint `POST /api/exercises` è **protetto** da autenticazione tramite **Token**.
 - Per accedere a questo endpoint:
-  - ottieni un token  valido POST ` login /api/login` .
+  - ottieni un token  valido  tramite `POST login /api/login` .
   - Inserisci il token nell'header `Authorization` della richiesta:
     ```
     Authorization: Bearer <token>
